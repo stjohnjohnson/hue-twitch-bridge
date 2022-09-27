@@ -1,6 +1,20 @@
 # hue-twitch-bridge
 Let your twitch viewers control your Hue lights
 
+## Running
+
+```bash
+$ docker run --rm -it --env-file .env stjohnjohnson/hue-twitch-bridge:latest
+> hue-twitch-bridge@1.0.0 start
+> node --experimental-specifier-resolution=node app.js
+
+[15:19] info: Connecting to irc-ws.chat.twitch.tv on port 443..
+[15:19] info: Sending authentication to server..
+[15:19] info: Connected to server.
+[15:19] info: Executing command: JOIN #stjohnjohnson
+[15:19] info: Joined #stjohnjohnson
+```
+
 ## Configuration
 
 Set the following environment variables:
