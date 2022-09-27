@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "colornames": "^1.1.1",
+    "colr": "^1.2.2",
+    "dotenv": "^16.0.2",
+    "limiter": "2.0.1",
+    "node-hue-api": "^5.0.0-beta.14",
+    "randomcolor": "^0.6.2",
+    "tmi.js": "^1.8.5"
+  },
+  "name": "hue-twitch-bridge",
+  "description": "Enable your Twitch viewers to control your Hue lights",
+  "version": "1.0.0",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --experimental-specifier-resolution=node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stjohnjohnson/hue-twitch-bridge.git"
+  },
+  "author": "St. John Johnson <st.john.johnson@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/stjohnjohnson/hue-twitch-bridge/issues"
+  },
+  "homepage": "https://github.com/stjohnjohnson/hue-twitch-bridge#readme"
+}
