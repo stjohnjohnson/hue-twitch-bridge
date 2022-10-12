@@ -44,7 +44,7 @@ If you don't have a preference, you can use `!color random`.
 
 ### Party
 
-And if you want to make it really silly, you can use `!party` which changes to a random color every second for 15 seconds.
+And if you want to make it really silly, you can use `!color party` which changes to a random color every second for 15 seconds.
 
 ### Rate Limiting
 
