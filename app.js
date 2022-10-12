@@ -60,37 +60,35 @@ client.on('message', async (channel, tags, message, self) => {
     // Ignore self
     if (self) return;
 
-    let [command, content] = message.toLowerCase().split(' ', 2);
-    switch (command) {
-        case '!party':
-            const remainingMessages = await limiterParty.removeTokens(1);
+    let [command, content] = message.toLowerCase().trim().split(' ', 2);
+    if (command != '!color') return;
+
+    if (content === 'party') {
+        const remainingMessages = await limiterParty.removeTokens(1);
+        if (remainingMessages < 0) {
+            client.say(channel, `Only one party per minute please`)
+        } else {
+            client.say(channel, `@${tags.username} started a PARTY!`)
+            for (let i = 0; i < 15; i++) {
+                await hueApi.groups.setGroupState(`${process.env.HUE_GROUPID}`, convertColorToState('random'));
+                await setTimeout(1000);
+            }
+            client.say(channel, `Alright, party's over...`)
+        }
+    } else {
+        let newState = convertColorToState(content.trim());
+
+        if (newState) {
+            const remainingMessages = await limiterColor.removeTokens(1);
             if (remainingMessages < 0) {
-                client.say(channel, `Only one party per minute please`)
+                client.say(channel, `One color change per second please`)
             } else {
-                client.say(channel, `@${tags.username} started a PARTY!`)
-                for ( let i = 0; i < 15; i++ ) {
-                    await hueApi.groups.setGroupState(`${process.env.HUE_GROUPID}`, convertColorToState('random'));
-                    await setTimeout(1000);
-                }
-                client.say(channel, `Alright, party's over...`)
+                hueApi.groups.setGroupState(`${process.env.HUE_GROUPID}`, newState).then(() => {
+                    console.log('Color updated');
+                }).catch(console.error);
             }
-            break;
-
-        case '!color':
-            let newState = convertColorToState(content.trim());
-
-            if (newState) {
-                const remainingMessages = await limiterColor.removeTokens(1);
-                if (remainingMessages < 0) {
-                    client.say(channel, `One color change per second please`)
-                } else {
-                    hueApi.groups.setGroupState(`${process.env.HUE_GROUPID}`, newState).then(() => {
-                        console.log('Color updated');
-                    }).catch(console.error);
-                }
-            } else {
-                client.say(channel, `Unknown color, please use cssname or #hex value`);
-            }
-            break;
+        } else {
+            client.say(channel, `Unknown color, please use cssname or #hex value`);
+        }
     }
 });

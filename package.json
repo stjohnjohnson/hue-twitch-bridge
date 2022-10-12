@@ -10,7 +10,7 @@
   },
   "name": "hue-twitch-bridge",
   "description": "Enable your Twitch viewers to control your Hue lights",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "main": "main.js",
   "type": "module",
   "scripts": {
